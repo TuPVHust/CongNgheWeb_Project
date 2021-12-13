@@ -48,8 +48,23 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        $keys = $request->only('name','model');
+        $products = Product::where('name',$keys['name'])->get();
+        $check = true;
+        foreach($products as $product)
+            {
+                if ($product->model->id == $keys['model'])
+                {
+                    $OverlapseProduct = $product;
+                    $check = false;
+                }
+            }
         if($request->validate([
-            'name'=>'required|unique:products,name',
+            // 'name'=>'required|unique:products,name',
+            // 'model'=>'required',
+            // 'description'=>'required',
+            // 'price' => 'required|numeric|min:0',
+            // 'sale' => 'required|numeric|min:0'
             'model'=>'required',
             'description'=>'required',
             'price' => 'required|numeric|min:0',
@@ -66,7 +81,7 @@ class ProductsController extends Controller
             'sale.min' => "giá sau sale sản phẩm cần lớn hơn không",
             'price.min' => "giá sản phẩm cần lớn hơn không"
         ]
-        )){
+        ) && $check){
             $product = Product::create([
                 'name' => $request->input('name'),
                 'model' => $request->input('brand_id'), 
@@ -76,6 +91,10 @@ class ProductsController extends Controller
                 'model_id' => $request->input('model')
             ]); 
             return redirect()->route('admin.product.index')->with('success','Thêm mới thành công.');
+        }
+        else{
+            $alert = 'Thêm mới không thành công do cấu hình sản phẩm đã tồn với id: ' . $OverlapseProduct->id . ' !';
+            return redirect()->route('admin.product.index')->with('danger', $alert);
         }
     }
 
@@ -116,8 +135,20 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
+        $keys = $request->only('name','model');
+        $products = Product::where('name',$keys['name'])->get();
+        $check = true;
+        foreach($products as $_product)
+            {
+                if ($_product->model->id == $keys['model'] && $_product->id != $product->id)
+                {
+                    $OverlapseProduct = $_product;
+                    $check = false;
+                }
+            }
+        
         if($request->validate([
-            'name'=>'required|unique:products,name,'.$product->id,
+            // 'name'=>'required|unique:products,name,'.$product->id,
             'model'=>'required',
             'description'=>'required',
             'price' => 'required|numeric|min:0',
@@ -135,7 +166,7 @@ class ProductsController extends Controller
             'price.min' => "giá sản phẩm cần lớn hơn không"
 
         ]
-        )){
+        ) && $check){
             $product->update([
                 'name' => $request->input('name'),
                 'model' => $request->input('brand_id'), 
@@ -145,6 +176,10 @@ class ProductsController extends Controller
                 'model_id' => $request->input('model')
             ]); 
             return redirect()->route('admin.product.index')->with('success','Cập nhật thành công.');
+        }
+        else{
+            $alert = 'Cập nhật không thành công do cấu hình sản phẩm đã tồn với id: ' . $OverlapseProduct->id . ' !';
+            return redirect()->route('admin.product.index')->with('danger', $alert);
         }
     }
 

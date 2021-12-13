@@ -12,31 +12,33 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{url('adminUI')}}/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="{{url('adminUI')}}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="{{ url('adminUI') }}/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet"
+        href="{{ url('adminUI') }}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
-    <link rel="stylesheet" href="{{url('adminUI')}}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url('adminUI') }}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Css Styles -->
     @livewireStyles
-    <link rel="stylesheet" href="{{url('site')}}/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="{{url('site')}}/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="{{url('site')}}/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="{{url('site')}}/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="{{url('site')}}/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="{{url('site')}}/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="{{url('site')}}/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="{{url('site')}}/css/style.css" type="text/css">
+    <link rel="stylesheet" href="{{ url('site') }}/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ url('site') }}/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ url('site') }}/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="{{ url('site') }}/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="{{ url('site') }}/css/style_nice.css" type="text/css">
+    <link rel="stylesheet" href="{{ url('site') }}/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ url('site') }}/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ url('site') }}/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ url('site') }}/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
 </head>
 
 <body>
     @section('alert')
-        
+
     @endsection
     <!-- Page Preloder -->
     <div id="preloder">
@@ -47,7 +49,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="{{url('site')}}/img/logo.png" alt=""></a>
+            <a href="#"><img src="{{ url('site') }}/img/logo.png" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -58,7 +60,7 @@
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="{{url('site')}}/img/language.png" alt="">
+                <img src="{{ url('site') }}/img/language.png" alt="">
                 <div>English</div>
                 <span><i class="fal fa-chevron-down"></i></span>
                 <ul>
@@ -66,12 +68,15 @@
                     <li><a href="#">English</a></li>
                 </ul>
             </div>
-           
+
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="{{route('home')}}">Home</a></li>
-                <li><a href="{{route('shop')}}">Shop</a></li>
+                <li @class([ 'active'=> Route::currentRouteName() == 'home',
+                    ])><a href="{{ route('home') }}">Home</a>
+                </li>
+                <li @class([ 'active'=> Route::currentRouteName() == 'shop',
+                    ]),><a href="{{ route('shop') }}">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="./shop-details.html">Shop Details</a></li>
@@ -122,7 +127,7 @@
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__language">
-                                <img src="{{url('site')}}/img/language.png" alt="">
+                                <img src="{{ url('site') }}/img/language.png" alt="">
                                 <div>English</div>
                                 <ul>
                                     <li><a href="#">Spanis</a></li>
@@ -132,26 +137,28 @@
                             <div class="header__top__right__auth">
                                 {{-- <a href="#"><i class="fa fa-user"></i> Login</a> --}}
                                 @guest
-                                    @if (Route::has('login'))
-                                    <a id="navbarDropdown" class="nav-link d-inline" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        <i class="fas fa-sign-in-alt"></i> Login
-                                    </a>
-                                         
-                                    @endif                                 
-                                    @if (Route::has('register'))
-                                        <a  class="nav-link d-inline" href="#"><i class="fas fa-user-plus"></i> Signup</a>
-                                    @endif
+                                @if (Route::has('login'))
+                                <a id="navbarDropdown" class="nav-link d-inline" href="#" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <i class="fas fa-sign-in-alt"></i> Login
+                                </a>
+
+                                @endif
+                                @if (Route::has('register'))
+                                <a class="nav-link d-inline" href="#"><i class="fas fa-user-plus"></i> Signup</a>
+                                @endif
                                 @else
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <i class="fa fa-user"></i> {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                            <i class="fas fa-sign-out-alt"></i> Logout
+                                                                                document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt"></i> Logout
                                     </a>
-    
+
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -168,14 +175,16 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="{{route('home')}}"><img src="{{url('site')}}/img/logo.png" alt=""></a>
+                        <a href="{{ route('home') }}"><img src="{{ url('site') }}/img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="{{route('home')}}">Home</a></li>
-                            <li><a href="{{route('shop')}}">Shop</a></li>
+                            <li @class([ 'active'=> Route::currentRouteName() == 'home',
+                                ])><a href="{{ route('home') }}">Home</a></li>
+                            <li @class([ 'active'=> Route::currentRouteName() == 'shop',
+                                ])><a href="{{ route('shop') }}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
@@ -215,7 +224,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="{{route('home')}}"><img src="{{url('site')}}/img/logo.png" alt=""></a>
+                            <a href="{{ route('home') }}"><img src="{{ url('site') }}/img/logo.png" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
@@ -265,10 +274,19 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="footer__copyright">
-                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                        <div class="footer__copyright__payment"><img src="{{url('site')}}/img/payment-item.png" alt=""></div>
+                        <div class="footer__copyright__text">
+                            <p>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                <script>
+                                    document.write(new Date().getFullYear());
+                                </script> All rights reserved | This template is made with <i class="fa fa-heart"
+                                    aria-hidden="true"></i> by <a href="https://colorlib.com"
+                                    target="_blank">Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
+                        <div class="footer__copyright__payment"><img src="{{ url('site') }}/img/payment-item.png"
+                                alt=""></div>
                     </div>
                 </div>
             </div>
@@ -278,23 +296,69 @@
 
     <!-- Js Plugins -->
     <!-- Bootstrap 4 -->
-    <script src="{{url('adminUI')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url('adminUI') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="{{ url('site') }}/js/jquery-3.3.1.min.js"></script>
+    <script src="{{ url('site') }}/js/bootstrap.min.js"></script>
+    <script src="{{ url('site') }}/js/jquery.nice-select.js"></script>
+    <script src="{{ url('site') }}/js/jquery-ui.min.js"></script>
+    <script src="{{ url('site') }}/js/jquery.slicknav.js"></script>
+    <script src="{{ url('site') }}/js/mixitup.min.js"></script>
+    @yield('js')
+    {{-- <script>
+        window.addEventListener('load', async (event) => {
+                {
+                    var _links = `["Iphone13proMax_do/iphone-11-do-3-1-org.jpg","Iphone13proMax_do/iphone-11-do-2-1-org.jpg","Iphone13proMax_do/iphone-11-do-1-1-1-org.jpg"]`;
+                    
+                    let _html = '';
+                    if (/^[\],:{}\s]*$/.test(_links.replace(/\\["\\\/bfnrtu]/g, '@').replace(
+                            /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(
+                            /(?:^|:|,)(?:\s*\[)+/g, ''))) {
+                        var imgArr = $.parseJSON(_links);
+                        for (var i = 0; i < imgArr.length; i++) {
+                            let url = "{{ url('uploads') }}" + "/" + imgArr[i];
+                            // _html += '<div class="col-md-3 shadow p-3 mb-5 bg-white rounded m-1" style="height: 100%">';
     
-    <script src="{{url('site')}}/js/jquery-3.3.1.min.js"></script>
-    <script src="{{url('site')}}/js/bootstrap.min.js"></script>
-    <script src="{{url('site')}}/js/jquery.nice-select.min.js"></script>
-    <script src="{{url('site')}}/js/jquery-ui.min.js"></script>
-    <script src="{{url('site')}}/js/jquery.slicknav.js"></script>
-    <script src="{{url('site')}}/js/mixitup.min.js"></script>
-    <script src="{{url('site')}}/js/owl.carousel.min.js"></script>
-    <script src="{{url('site')}}/js/main.js"></script>
+                            // _html += '<img src="' + url + '" alt="" style="width: 100%">';
+                            // _html += '</div>';
+                            _html += `<img data-imgbigurl="${url}" src="${url}" alt="">`
+                        }
+    
+                    } else {
+                        let url = "{{ url('uploads') }}" + "/" + _links;
+    
+                        // _html += '<div class="col-md-3 shadow p-3 mb-5 bg-white rounded m-1" style="height: 100%">';
+    
+                        // _html += '<img src="' + url + '" alt="" style="width: 100%">';
+                        // _html += '</div>';
+                        _html = `<img data-imgbigurl="${url}"
+                                    src="${url}" alt="">`
+    
+                    }
+                    await $('#productImages').html(_html);
+                    // Initail data for images end
+                    //Initail data for poster 
+                    // $.getScript("{{ url('site') }}/js/owl.carousel.min.js");
+
+                    let script = document.createElement('script');
+                    script.addEventListener('load', (event) => {
+                    console.log('app.js file has been loaded');
+                    script.src = "{{ url('site') }}/js/owl.carousel.min.js";
+                    document.body.appendChild(script);
+                }
+            });
+    </script> --}}
+    <script src="{{ url('site') }}/js/owl.carousel.min.js"></script>
+    <script src="{{ url('site') }}/js/main.js"></script>
     <!--Font awsome-->
     <script src="https://kit.fontawesome.com/2575698111.js" crossorigin="anonymous"></script>
-    
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  @livewireScripts
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    @livewireScripts
 
 </body>
 

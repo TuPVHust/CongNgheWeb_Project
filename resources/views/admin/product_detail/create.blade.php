@@ -13,7 +13,7 @@
                     <label for="product"> tên Sản phẩm</label>
                     <select class="form-control" name="product" id="product">
                         @foreach ($products as $product)
-                            <option value={{ $product->id }}>{{ $product->name }}</option>
+                            <option value={{ $product->id }}>{{ $product->model->name }} {{ $product->name }}</option>
                         @endforeach
                     </select>
                     @error('product')

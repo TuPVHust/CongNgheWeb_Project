@@ -45,8 +45,17 @@
             @foreach($data as $d)
             <tr>
                 <td >{{$d->id}}</td>
-                <td>{{$d->name}}</td>
-                <td>{{$d->code}}</td>
+                <td>@if($d->name)
+                    {{$d->name}} 
+                    @else 
+                    none 
+                    @endif 
+                </td>
+                <td>@if($d->code)
+                    {{$d->code}} 
+                    @else 
+                    none 
+                    @endif </td>
                 <td class="text-right">
                     <a name="" id="" class="btn btn-sm btn-primary" href="{{route('admin.color.edit', $d->id)}}" role="button"><i class="fa fa-edit"></i></a>
                     <a name="" id="" class="btn btn-sm btn-danger btndelete" href="{{route('admin.color.destroy',$d->id)}}" role="button"><i class="fa fa-trash"></i> </a>

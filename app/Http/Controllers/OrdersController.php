@@ -158,7 +158,7 @@ class OrdersController extends Controller
     {
         $order = Order::find($id);   
         if ($order->orderdetails()->count()>0){
-            return redirect()->route('admin.order.index')->with('error','Xóa bản ghi không thành công do có chứa chi tiết đơn hàng.');
+            return redirect()->route('admin.order.index')->with('danger','Xóa bản ghi không thành công do có chứa chi tiết đơn hàng.');
         }
         else{
             $order->delete();

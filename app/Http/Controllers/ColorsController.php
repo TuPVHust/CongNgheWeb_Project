@@ -47,6 +47,8 @@ class ColorsController extends Controller
         if($request->validate([
             'name'=>'required|unique:colors,name',
             'code'=>'required|unique:colors,code'
+            // 'name'=>'unique:colors,name',
+            // 'code'=>'unique:colors,code'
         ],
         [
             'name.required' => 'Cần nhập tên màu',
@@ -125,6 +127,6 @@ class ColorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+       
     }
 }

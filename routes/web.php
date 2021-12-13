@@ -12,6 +12,8 @@ use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\ProductDetailsController;
 use App\Http\Controllers\ProductsController;
+use App\Models\ProductDetail;
+use App\Models\Product;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,6 +58,19 @@ Route::get('/shop', function () {
     return view('site.shop');
 })->name('shop');
 
+Route::get('/shop-detail/{product_detail}', function ($product_detail) {
+    $product = ProductDetail::find($product_detail);
+    $products = ProductDetail::all();
+    $images = json_decode($product->images, true);
+    
+    return view('site.shop-detail',[
+        'product' => $product,
+        'images' => $images,
+        'products' => $products,
+    ]);
+})->name('shop-detail');
 
+
+// Route::get('/shop-detail/{product_detail}', ProductDetailSection::class)->name('shop-detail');
 Auth::routes();
 
