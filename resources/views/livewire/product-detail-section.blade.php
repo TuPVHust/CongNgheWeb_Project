@@ -41,12 +41,14 @@
                             quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
                         <div class="product__details__quantity">
                             <div class="quantity">
-                                <div class="pro-qty">
+                                <div class="pro-qty" id="pro-qtyId">
                                     <input type="text" value="1">
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="primary-btn">ADD TO CARD</a>
+                        <div class="d-inline" id="div-primary-btn"><a href="javascript:void(0)"
+                                class="primary-btn">ADD
+                                TO CARD</a></div>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul class="product__figure__color">
                             @if ($product->product->name)
@@ -93,12 +95,16 @@
                                                     role="button">{{ $color->name }}</a>
                                             </div>
                                         @else
-                                            <p>No color found</p>
+                                            <div class="col-lg-3 mt-3">
+                                                <p>No color found</p>
+                                            </div>
                                         @endif
                                     @endforeach
                                 </div>
                             @else
-                                <p class="ml-2">No model found</p>
+                                <div class="col-lg-3 mt-3">
+                                    <p class="ml-10">No model found</p>
+                                </div>
                                 @if ($product->color->name != 'none')
                                     <div class="row">
                                         @foreach ($colors as $color)
@@ -119,7 +125,9 @@
                                         @endforeach
                                     </div>
                                 @else
-                                    <p>No color found</p>
+                                    <div class="col-lg-3 mt-3">
+                                        <p>No color found</p>
+                                    </div>
                                 @endif
                             @endif
 
@@ -220,20 +228,27 @@
                 </div>
             </div>
             <div class="row">
+                @php
+                    $hasProducts = false;
+                @endphp
                 @foreach ($relatedProducts as $relatedProduct)
                     @if ($relatedProduct->productDetails->first() && $relatedProduct->id != $productId)
                         @php
+                            $hasProducts = true;
                             $next = $relatedProduct->productDetails->first();
                         @endphp
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg d-flex align-items-center">
-                                    <img src="{{ url('uploads') }}/{{ $next->poster }}" alt=""
-                                        style="width: auto; height: auto">
+                                    <a href="{{ route('shop-detail', $next->id) }}"><img
+                                            src="{{ url('uploads') }}/{{ $next->poster }}" alt=""
+                                            style="width: auto; height: auto"></a>
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="#"
+                                                wire:click.prevent="$emit('store',{{ $next->id }},'{{ $next->product->model->name }} {{ $next->product->name }}','{{ $next->color->name }}',{{ $next->product->sale }},1)"><i
+                                                    class="fa fa-shopping-cart"></i></a>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
@@ -261,10 +276,18 @@
                     @endif
                 @endforeach
             </div>
+            @if (!$hasProducts)
+                <h4 class="text-center">No product found</h4>
+            @endif
         </div>
     </section>
     <!-- Related Product Section End -->
 </div>
+<script>
+    function add() {
+        alert('clcik');
+    }
+</script>
 @section('js')
     <script>
         function toggle() {
@@ -277,5 +300,12 @@
                 desContainer.style.maxHeight = '500px'
             }
         }
+        $("#div-primary-btn").click(function() {
+            var $button = document.getElementById('pro-qtyId');
+            Livewire.emit('store', "{{ $product->id }}", "{{ $product->product->model->name }}" +
+                "{{ $product->product->name }}", "{{ $product->color->name }}",
+                "{{ $product->product->sale }}",
+                $button.firstElementChild.nextElementSibling.value);
+        });
     </script>
 @endsection

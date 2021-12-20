@@ -5,34 +5,37 @@
             <div class="latest-product__slider owl-carousel">
                 <div class="latest-prdouct__slider__item">
                     @foreach ($products as $product)
-                    <a href="{{route('shop-detail', $product->id)}}" class="latest-product__item">
-                        <div class="latest-product__item__pic d-flex align-items-center"
-                            style="width: 100px; height:100px">
-                            <img src="{{ url('uploads') }}/{{$product->poster}}" alt=""
-                                style="width: 100%; height: auto">
-                        </div>
-                        <div class="latest-product__item__text ">
-                            <h6 style="
+                        <a href="{{ route('shop-detail', $product->id) }}" class="latest-product__item">
+                            <div class="latest-product__item__pic d-flex align-items-center"
+                                style="width: 100px; height:100px">
+                                <a href="{{ route('shop-detail', $product->id) }}"><img
+                                        src="{{ url('uploads') }}/{{ $product->poster }}" alt=""
+                                        style="width: 100%; height: auto"></a>
+                            </div>
+                            <div class="latest-product__item__text ">
+                                <h6 style="
                             overflow: hidden;
                             text-overflow: ellipsis;
                             display: -webkit-box;
                             -webkit-line-clamp: 2;
                                     line-clamp: 2; 
-                            -webkit-box-orient: vertical;">{{$product->product->model->name}}
-                                {{$product->product->name}}</h6>
-                            {{-- <span>{{ number_format($product->product->sale) }} <small class="bold">đ</small></span>
-                            --}}
-                            @if ($product->product->price > $product->product->sale )
-                            <h6 style="text-decoration: line-through">{{ number_format($product->product->price) }}
-                                <small>đ</small></h6>
-                            <h5 class="font-weight-bold">{{ number_format($product->product->sale) }} <small
-                                    class="font-weight-bold">đ</small></h5>
-                            @else
-                            <h5 class="font-weight-bold">{{ number_format($product->product->price) }} <small>đ</small>
-                            </h5>
-                            @endif
-                        </div>
-                    </a>
+                            -webkit-box-orient: vertical;">{{ $product->product->model->name }}
+                                    {{ $product->product->name }}</h6>
+                                {{-- <span>{{ number_format($product->product->sale) }} <small class="bold">đ</small></span> --}}
+                                @if ($product->product->price > $product->product->sale)
+                                    <h6 style="text-decoration: line-through">
+                                        {{ number_format($product->product->price) }}
+                                        <small>đ</small>
+                                    </h6>
+                                    <h5 class="font-weight-bold">{{ number_format($product->product->sale) }} <small
+                                            class="font-weight-bold">đ</small></h5>
+                                @else
+                                    <h5 class="font-weight-bold">{{ number_format($product->product->price) }}
+                                        <small>đ</small>
+                                    </h5>
+                                @endif
+                            </div>
+                        </a>
                     @endforeach
                 </div>
                 {{-- <div class="latest-prdouct__slider__item">

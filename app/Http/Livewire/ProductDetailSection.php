@@ -5,8 +5,23 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\ProductDetail;
 use App\Models\Product;
+use Cart;
 class ProductDetailSection extends Component
 {
+    public function store($product_id, $product_name, $product_color, $product_price,$quantity)
+    {
+        // if($product_color == 'none'){
+        //     Cart::add($product_id, $product_name, 1, $product_price);
+        // }
+        // else{
+        //     $product_name = $product_name . ' ' . $product_color;
+        //     Cart::add($product_id, $product_name, 1, $product_price);
+        // }
+        Cart::add($product_id, $product_name, $quantity, $product_price);
+        session()->flash('success','Thêm mới một mục vào rỏ hàng');
+        return redirect()->route('cart');
+    }
+    protected $listeners = ['store'];
     public $product;
     public $images;
     public function render()

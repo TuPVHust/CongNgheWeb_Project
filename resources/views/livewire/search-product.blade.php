@@ -107,6 +107,6 @@
         </div>
     @endif
     <div>
-        {{ $products->links('livewire.custom-paginate-links') }}
+        {{-- {{ $products->links('livewire.custom-paginate-links') }} --}}
     </div>
 </div>

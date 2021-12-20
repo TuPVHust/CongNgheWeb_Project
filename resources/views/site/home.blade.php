@@ -1,5 +1,7 @@
 @extends('layouts.site')
-
+@section('header')
+    Home
+@endsection
 @section('content')
     <!-- Hero Section Begin -->
     @livewire('hero',['thisRoute' => Route::currentRouteName()])

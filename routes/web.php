@@ -12,6 +12,7 @@ use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\ProductDetailsController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\HomeController;
 use App\Models\ProductDetail;
 use App\Models\Product;
 /*
@@ -53,9 +54,10 @@ Route::prefix('admin')->name('admin.')->middleware([CheckAdminLogin::class])->gr
     })->name('file');
 
 });
-
 Route::get('/shop', function () {
-    return view('site.shop');
+    return view('site.shop',[
+        'products' => ProductDetail::all(),
+    ]);
 })->name('shop');
 
 Route::get('/shop-detail/{product_detail}', function ($product_detail) {
@@ -70,7 +72,12 @@ Route::get('/shop-detail/{product_detail}', function ($product_detail) {
     ]);
 })->name('shop-detail');
 
+Route::get('/cart', function () {
+    return view('site.cart');
+})->name('cart');
 
+Route::get('/search', [HomeController::class,'search'])->name('search');
+Route::get('/getCheckOut', [HomeController::class,'getCheckOut'])->name('checkout');
 // Route::get('/shop-detail/{product_detail}', ProductDetailSection::class)->name('shop-detail');
 Auth::routes();
 
