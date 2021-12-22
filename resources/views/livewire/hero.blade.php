@@ -14,7 +14,7 @@
                         </div>
                         <ul>
                             @foreach ($categories as $category)
-                                <li><a href="#">{{ $category->name }}</a></li>
+                                <li><a href="/search?key={{ $category->name }}">{{ $category->name }}</a></li>
                             @endforeach
                             {{-- <li><a href="#">Fresh Meat</a></li>
                             <li><a href="#">Vegetables</a></li>

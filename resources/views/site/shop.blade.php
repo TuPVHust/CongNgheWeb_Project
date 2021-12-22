@@ -3,7 +3,18 @@
     Shop
 @endsection
 @section('content')
-
+    @if (session('danger'))
+        <div class="alert alert-danger alert-dismissible fade show container">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ session('danger') }}
+        </div>
+    @endif
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ session('success') }}
+        </div>
+    @endif
     <!-- Hero Section Begin -->
     @livewire('hero',['thisRoute' => Route::currentRouteName()])
     <!-- Hero Section End -->

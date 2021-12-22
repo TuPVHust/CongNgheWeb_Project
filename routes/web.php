@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Middleware\CheckAdminLogin;
+use App\Http\Middleware\CheckOutCheck;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\AccountsController;
@@ -77,7 +78,7 @@ Route::get('/cart', function () {
 })->name('cart');
 
 Route::get('/search', [HomeController::class,'search'])->name('search');
-Route::get('/getCheckOut', [HomeController::class,'getCheckOut'])->name('checkout');
+Route::get('/getCheckOut', [HomeController::class,'getCheckOut'])->middleware([CheckOutCheck::class])->name('checkout');
 // Route::get('/shop-detail/{product_detail}', ProductDetailSection::class)->name('shop-detail');
 Auth::routes();
 

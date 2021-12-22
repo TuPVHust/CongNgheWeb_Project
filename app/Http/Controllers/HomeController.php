@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\ProductDetail;
-
+use App\Models\Category;
+use Cart;
 class HomeController extends Controller
 {
     /**
@@ -21,7 +22,7 @@ class HomeController extends Controller
 
     public function search( Request $request){
         if(!request()->filled('key')){
-            return redirect()->route('home');
+            return redirect()->route('shop');
         }
         else
         {
@@ -36,7 +37,10 @@ class HomeController extends Controller
         }  
     }
     public function getCheckOut(){
-        return view('site.checkout');
+        $items=Cart::content();
+        return view('site.checkout',[
+            'items' => $items,
+        ]);
     }
     /**
      * Show the application dashboard.
@@ -45,6 +49,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('site.home');
+        $products = ProductDetail::paginate(8);
+        $latestProducts = ProductDetail::orderby('created_at','desc')->take(3)->get();
+        $categories = Category::all();
+        return view('site.home',[
+            'products' => $products,
+            'latestProducts' => $latestProducts,
+            'categories' => $categories,
+        ]);
     }
 }

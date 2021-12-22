@@ -44,11 +44,11 @@
                                             <div class="quantity">
                                                 <div class="pro-qty-cart">
                                                     <span class="dec qtybtn"
-                                                        wire:click="quantityreduce('{{ $item->rowId }}')">-</span>
+                                                        wire:click="$emit('quantityreduce', '{{ $item->rowId }}')">-</span>
                                                     <input type="text" value="{{ $item->qty }}"
-                                                        wire:change.prevent="quantitychange('{{ $item->rowId }}',$event.target.value)">
+                                                        wire:change.prevent="$emit('quantitychange', '{{ $item->rowId }}',$event.target.value )">
                                                     <span class="inc qtybtn"
-                                                        wire:click="quantityincrease('{{ $item->rowId }}')">+</span>
+                                                        wire:click="$emit('quantityincrease', '{{ $item->rowId }}')">+</span>
                                                 </div>
                                             </div>
                                         </td>
@@ -70,7 +70,8 @@
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
                         <a href="{{ route('shop') }}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                        <a href="{{ route('cart') }}" class="primary-btn cart-btn cart-btn-right"><span
+                                class="icon_loading"></span>
                             Upadate Cart</a>
                     </div>
                 </div>
