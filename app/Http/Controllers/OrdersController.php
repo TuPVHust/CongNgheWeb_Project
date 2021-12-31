@@ -19,7 +19,7 @@ class OrdersController extends Controller
         }
         else {
             // $data = proModel::with('brand')->paginate(5);
-            $data = Order::orderby('name','desc')->paginate(100);
+            $data = Order::orderby('id','desc')->paginate(100);
         }
         $data = Order::orderby('id','desc')->paginate(100);
         return view('admin.order.index',[

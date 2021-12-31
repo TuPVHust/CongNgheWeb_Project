@@ -29,7 +29,8 @@
             </div>
             <div class="checkout__form">
                 <h4>Billing Details</h4>
-                <form action="#">
+                <form action="{{ route('placeorder') }}" method="post">
+                    @csrf
                     <div class="row">
                         <div class="col-lg-7 col-md-6">
                             {{-- <div class="col-lg-6">
@@ -46,7 +47,10 @@
                                 </div> --}}
                             <div class="checkout__input">
                                 <p>Tên người nhận<span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="name" value="{{ old('name') }}">
+                                @error('name')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                             {{-- <div class="checkout__input">
                                 <p>Country<span>*</span></p>
@@ -54,7 +58,11 @@
                             </div> --}}
                             <div class="checkout__input">
                                 <p>Địa chỉ<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add">
+                                <input type="text" placeholder="Địa chỉ" class="checkout__input__add" name="address"
+                                    value="{{ old('address') }}">
+                                @error('address')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                             {{-- <div class="checkout__input">
                                 <p>Town/City<span>*</span></p>
@@ -64,7 +72,7 @@
                                 <p>Country/State<span>*</span></p>
                                 <input type="text">
                             </div> --}}
-                            <div class="checkout__input">
+                            <div class="checkout__input" name="postcode">
                                 <p>Postcode / ZIP<span>*</span></p>
                                 <input type="text">
                             </div>
@@ -72,17 +80,23 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Phone<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="phone" value="{{ old('phone') }}">
+                                        @error('phone')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="email" value="{{ old('email') }}">
+                                        @error('email')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
-                            <div class="checkout__input__checkbox">
+                            {{-- <div class="checkout__input__checkbox">
                                 <label for="acc">
                                     Create an account?
                                     <input type="checkbox" id="acc">
@@ -94,7 +108,7 @@
                             <div class="checkout__input">
                                 <p>Account Password<span>*</span></p>
                                 <input type="text">
-                            </div>
+                            </div> --}}
                             <div class="checkout__input__checkbox">
                                 <label for="diff-acc">
                                     Ship to a different address?
@@ -103,8 +117,9 @@
                                 </label>
                             </div>
                             <div class="checkout__input">
-                                <p>Order notes<span>*</span></p>
-                                <input type="text" placeholder="Notes about your order, e.g. special notes for delivery.">
+                                <p>Order notes</p>
+                                <input type="text" placeholder="Notes about your order, e.g. special notes for delivery."
+                                    name="note" value="{{ old('note') }}">
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-6">
@@ -120,11 +135,11 @@
                                         <li class="d-flex justify-content-between align-items-center">
                                             <p style=" overflow: hidden;
                                                                 text-overflow: ellipsis;
-                                                                display: -webkit-box;                               
-                                                                -webkit-line-clamp: 1;                               
-                                                                line-clamp: 1; 
-                                                                -webkit-box-orient: vertical;
-                                                                width: 40%" data-toggle="popover" data-placement="top"
+                                                            display: -webkit-box;                               
+                                                            -webkit-line-clamp: 1;                               
+                                                            line-clamp: 1; 
+                                                            -webkit-box-orient: vertical;
+                                                            width: 40%" data-toggle="popover" data-placement="top"
                                                 data-content="{{ $item->name }}" class="mt-3">
                                                 {{ $item->name }}
                                             </p>

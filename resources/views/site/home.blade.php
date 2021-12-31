@@ -85,11 +85,11 @@
                             <div class="product__item__text">
                                 <h6><a href="{{ route('shop-detail', $product->id) }}"
                                         style="overflow: hidden;
-                                                                    text-overflow: ellipsis;
-                                                                    display: -webkit-box;
-                                                                    -webkit-line-clamp: 2;
-                                                                                line-clamp: 2; 
-                                                                    -webkit-box-orient: vertical;">{{ $product->product->model->name }}
+                                                                            text-overflow: ellipsis;
+                                                                            display: -webkit-box;
+                                                                            -webkit-line-clamp: 2;
+                                                                                        line-clamp: 2; 
+                                                                            -webkit-box-orient: vertical;">{{ $product->product->model->name }}
 
                                         {{ $product->product->name }}</a></h6>
                                 @if ($product->product->price > $product->product->sale)
@@ -152,16 +152,16 @@
                                         </div>
                                         <div class="latest-product__item__text ">
                                             <h6 style="
-                                                overflow: hidden;
-                                                text-overflow: ellipsis;
-                                                display: -webkit-box;
-                                                -webkit-line-clamp: 2;
-                                                        line-clamp: 2; 
-                                                -webkit-box-orient: vertical;">
+                                                        overflow: hidden;
+                                                        text-overflow: ellipsis;
+                                                        display: -webkit-box;
+                                                        -webkit-line-clamp: 2;
+                                                                line-clamp: 2; 
+                                                        -webkit-box-orient: vertical;">
                                                 {{ $latestProduct->product->model->name }}
                                                 {{ $latestProduct->product->name }}</h6>
                                             {{-- <span>{{ number_format($product->product->sale) }} <small class="bold">đ</small></span> --}}
-                                            @if ($latestProduct->product->price > $product->product->sale)
+                                            @if ($latestProduct->product->price > $latestProduct->product->sale)
                                                 <h6 style="text-decoration: line-through">
                                                     {{ number_format($latestProduct->product->price) }}
                                                     <small>đ</small>
@@ -172,7 +172,7 @@
                                                 </h5>
                                             @else
                                                 <h5 class="font-weight-bold">
-                                                    {{ number_format($prolatestProductduct->product->price) }}
+                                                    {{ number_format($latestProducts->product->price) }}
                                                     <small>đ</small>
                                                 </h5>
                                             @endif

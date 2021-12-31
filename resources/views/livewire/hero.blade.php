@@ -16,17 +16,6 @@
                             @foreach ($categories as $category)
                                 <li><a href="/search?key={{ $category->name }}">{{ $category->name }}</a></li>
                             @endforeach
-                            {{-- <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li> --}}
                         </ul>
 
                     </div>
@@ -35,6 +24,7 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="{{ route('search') }}" method="GET">
+                                @csrf
                                 <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
@@ -60,7 +50,7 @@
                                 <span>FRUIT FRESH</span>
                                 <h2>Vegetable <br />100% Organic</h2>
                                 <p>Free Pickup and Delivery Available</p>
-                                <a href="#" class="primary-btn">SHOP NOW</a>
+                                <a href="{{ route('shop') }}" class="primary-btn">SHOP NOW</a>
                             </div>
                         </div>
                     @endif

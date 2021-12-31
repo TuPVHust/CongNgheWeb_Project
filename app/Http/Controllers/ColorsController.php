@@ -101,7 +101,7 @@ class ColorsController extends Controller
     {
         $color = Color::find($id);
         if($request->validate([
-            'name'=>'required|unique:models,name,'.$color->id,
+            'name'=>'required|unique:colors,name,'.$color->id,
             'code'=>'required|unique:colors,code,'.$color->id,
         ],
         [

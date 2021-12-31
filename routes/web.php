@@ -72,13 +72,15 @@ Route::get('/shop-detail/{product_detail}', function ($product_detail) {
         'products' => $products,
     ]);
 })->name('shop-detail');
-
+Auth::routes();
 Route::get('/cart', function () {
     return view('site.cart');
 })->name('cart');
 
 Route::get('/search', [HomeController::class,'search'])->name('search');
+Route::post('/placeOrder', [HomeController::class,'placeOrder'])->name('placeorder')->middleware('auth');
+
 Route::get('/getCheckOut', [HomeController::class,'getCheckOut'])->middleware([CheckOutCheck::class])->name('checkout');
 // Route::get('/shop-detail/{product_detail}', ProductDetailSection::class)->name('shop-detail');
-Auth::routes();
+
 
